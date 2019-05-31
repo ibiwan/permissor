@@ -1,4 +1,5 @@
 import React from 'react';
+import Router from '../components/router/index'
 import logo from '../../assets/logo.svg';
 import './App.css';
 
@@ -19,6 +20,7 @@ function App() {
           Learn React
         </a>
       </header>
+      <Router></Router>
     </div>
   );
 }
