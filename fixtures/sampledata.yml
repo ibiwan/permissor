@@ -1,0 +1,170 @@
+entity_type:
+  - entity_type_id: 101 #xn
+    name:           transaction
+    table_name:     transactions
+  - entity_type_id: 102 #prop
+    name:           property
+    table_name:     properties
+  - entity_type_id: 103 #sms
+    name:           sms_message
+    table_name:     ~
+
+action:
+  - action_id: 201 #c
+    name:      create
+  - action_id: 202 #r
+    name:      read
+  - action_id: 203 #u
+    name:      update
+  - action_id: 204 #d
+    name:      delete
+  - action_id: 205 #lock
+    name:      lock
+  - action_id: 206 #send
+    name:      send
+  - action_id: 207 #assoc
+    name:      associate
+  
+scope:
+  - scope_id: 301 #all
+    name:     all
+  - scope_id: 302 #own
+    name:     owned
+  - scope_id: 304 #assigned
+    name:     assigned
+  - scope_id: 305 #sent to
+    name:     sent_to
+
+authentication:
+  - authentication_id: 401 #web_with_password
+    name:              web_with_password
+    source:            https
+    ip_range:          ~
+    method:            login_password
+    enabled:           true
+  - authentication_id: 402 #api_internal_network
+    name:              api_internal_network
+    source:            https
+    ip_range:          146.213.0.1/255.255.0.0
+    method:            allow
+    enabled:           true
+  - authentication_id: 403 #api_public
+    name:              api_public
+    source:            https
+    ip_range:          ~
+    method:            api_key
+    enabled:           true
+  - authentication_id: 404 #command_line_admin
+    name:              command_line_admin
+    source:            127.0.0.1/0.0.0.0
+    ip_range:          ~
+    method:            allow
+    enabled:           true
+
+role:
+  - role_id:         501 #paylease_employee
+    name:            paylease_employee
+    overrides:       []
+    can_login:       false
+    authentications: []
+    parents:         []
+  - role_id:         502 #sys_admin
+    name:            sys_admin
+    overrides:       []
+    can_login:       true
+    authentications:
+      - authentication_id: 401
+        shadow:            '{"salt":"76r678v8","hash":"5678rv5678rvf5"}'
+      - authentication_id: 404
+        shadow:            ~
+    parents:         [501]
+  - role_id:         503 #account_admin
+    name:            account_admin
+    overrides:       []
+    can_login:       false
+    authentications: []
+    parents:         [501]
+  - role_id:         504 #cust_service_rep
+    name:            cust_service_rep
+    overrides:       []
+    can_login:       false
+    authentications: []
+    parents:         [501]
+  - role_id:         505 #partner
+    name:            partner
+    overrides:       []
+    can_login:       false
+    authentications: []
+    parents:         []
+  - role_id:         506 #property_owner
+    name:            property_owner
+    overrides:       []
+    can_login:       false
+    authentications: []
+    parents:         [505]
+  - role_id:         507 #property_manager
+    name:            property_manager
+    overrides:       []
+    can_login:       false
+    authentications: []
+    parents:         [505]
+  - role_id:         508 #third_party
+    name:            third_party
+    overrides:       []
+    can_login:       false
+    authentications: []
+    parents:         []
+  - role_id:         509 #resident
+    name:            resident
+    overrides:       []
+    can_login:       false
+    authentications: []
+    parents:         [508]
+  - role_id:         510 #roommate
+    name:            roommate
+    overrides:       []
+    can_login:       false
+    authentications: []
+    parents:         [508]
+  - role_id:         511 #external_integration
+    name:            external_integration
+    overrides:       []
+    can_login:       false
+    authentications: []
+    parents:         [505]
+  - role_id:         512 #internal_service
+    name:            internal_service
+    overrides:       []
+    can_login:       false
+    authentications: []
+    parents:         [501]
+  - role_id:         513 #maintenance_tech
+    name:            maintenance_tech
+    overrides:       []
+    can_login:       false
+    authentications: []
+    parents:         [508]
+  - role_id:         514 #non-actor
+    name:            non-actor
+    overrides:       []
+    can_login:       false
+    authentications: []
+    parents:         []
+  - role_id:         515 #non-actor
+    name:            non-actor
+    overrides:       []
+    can_login:       false
+    authentications: []
+    parents:         []
+
+override_:
+  - override_set_id: 601
+    name:            all
+    permissions:     [701, 702, 703, ..., 799]
+  - override_set_id: 602
+    name:            preferences
+    permissions:     []
+
+permission:
+
+operation:
