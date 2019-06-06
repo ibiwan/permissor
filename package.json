@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "express": "^4.17.1",
     "lowdb": "^1.0.0",
     "mongoose": "^5.5.12",
     "react": "^16.8.6",
@@ -16,8 +17,9 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
+    "server": "nodemon -w server -w package.json server/index.js",
     "mongo-mac": "mkdir -p mongo-db; mongod --dbpath mongo-db --port 27088",
-    "start-mongo-mac": "npm run mongo-mac > 1  | npm run start"
+    "all": "npm run server & npm run mongo-mac & npm run start"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -33,5 +35,6 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  }
+  },
+  "proxy": "http://localhost:8080"
 }

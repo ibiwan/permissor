@@ -2,6 +2,7 @@ import React from 'react';
 import Router from '../components/router/index'
 import logo from '../../assets/logo.svg';
 import './App.css';
+import Playground from '../components/playground';
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
           Learn React
         </a>
       </header>
+      <Playground></Playground>
       <Router></Router>
     </div>
   );
