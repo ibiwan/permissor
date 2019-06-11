@@ -1,48 +1,50 @@
 const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
+const Schema   = mongoose.Schema;
 
-import groupModelName from './group';
+const group = require('./group');
 
-export const userModelName = 'User';
+const userModelName = 'User';
 
 const userSchema = new Schema({
-    name: String,
+    name       : String,
     instance_of: {
         type: Schema.Types.ObjectId,
-        ref: groupModelName,
+        ref : group.groupModelName,
     },
     subordinate_to: [
         {
             type: Schema.Types.ObjectId,
-            ref: userModelName,
+            ref : userModelName,
         }
     ],
     authority: {
         type: Schema.Types.ObjectId,
-        ref: 'Authority',
+        ref : 'Authority',
     },
     permissions: [
         {
             permission: {
                 type: Schema.Types.ObjectId,
-                ref: 'Permission'
+                ref : 'Permission'
             },
             override_value: {
-                type: Schema.Types.Boolean,
+                type    : Schema.Types.Boolean,
                 required: true
             },
             override_authority_to_permit: {
-                type: Schema.Types.ObjectId,
-                ref: 'Authority',
+                type    : Schema.Types.ObjectId,
+                ref     : 'Authority',
                 required: false
             },
             override_authority_to_permit: {
-                type: Schema.Types.ObjectId,
-                ref: 'Authority',
+                type    : Schema.Types.ObjectId,
+                ref     : 'Authority',
                 required: false
             },
         },
     ],
 });
 
-export const UserModel = mongoose.model(userModelName, userSchema);
+const UserModel = mongoose.model(userModelName, userSchema);
+
+module.exports = { userModelName, UserModel };

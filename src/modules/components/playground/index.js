@@ -1,19 +1,30 @@
 import React, { useState, useEffect } from "react";
 
 function Playground() {
-    const [result, setResult] = useState('Hello Wurld');
+    const [pingResult, setPingResult]     = useState('Hello Wurld');
+    const [initDbResult, setInitDbResult] = useState('Initializing DB...');
 
     useEffect(() => {
-        const setPingResult = async () => {
+
+        (async () => {
             const result = await window.fetch('/ping');
-            const text = await result.text();
-            setResult(text);
-        };
-        setPingResult();
+            const text   = await result.text();
+            setPingResult(text + '!');
+        })();
+
+        (async () => {
+            const result = await window.fetch('/init-test-data');
+            const text   = await result.text();
+            setInitDbResult(text);
+        })();
+
     });
 
     return (
-        <div>{result}</div>
+        <>
+            <div>{pingResult}</div>
+            <div>{initDbResult}</div>
+        </>
     );
 }
 
